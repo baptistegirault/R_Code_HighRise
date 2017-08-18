@@ -14,7 +14,7 @@ library(ggplot2)
 setwd(dir = "C:/Baptiste/DB_Finale/LondonPlan/Data")
 
 #Load Towers file (include all stamped existing and in project towers inside Borough with known Conservations Areas) 
-  #895 stamped and planned towers (39.1% of the initial database)
+  #758 towers (84.7% of stamped and planned towers)
 Tours <- readOGR("Emporis/ToursExistantes/ToursExistantesProjetsWithData.shp", 
                  "ToursExistantesProjetsWithData")
 
