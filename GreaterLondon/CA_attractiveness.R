@@ -17,11 +17,17 @@ setwd(dir = "C:/Baptiste/DB_Finale/LondonPlan/Data")
   #1883 stamped and planned towers (39.1% of the initial database)
 Tours <- readOGR("Emporis/ToursExistantes/LondonEmporis2017WithData.shp",
                  "LondonEmporis2017WithData")
-
+#Change into good projection (here British Grid)
+BritishGrid <- CRS("+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs")
+Tours <- spTransform(Tours, BritishGrid)
 
 #Load Greater London Conservations Areas 
 CA <- readOGR("ConservationAreasJuly2017/WithDataLondon.shp",
               "WithDataLondon")
+#Remmove Borough with missing data and change of projection
+CA <- subset(CA_Total, CA_Total@data$CAPTURE_SC != "NO DATA CURRENTLY AVAILABLE FOR THIS DISTRICT")
+CA <- spTransform(CA, BritishGrid)
+
 
 #Load Greater London Conservations Areas Buffer (100m, 200m and 300m)
 Zone1 <- readOGR("ConservationAreasJuly2017/Zone/CAbuffer100.shp",
